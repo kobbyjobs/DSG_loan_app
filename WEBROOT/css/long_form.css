@@ -1,0 +1,106 @@
+/***************************************************************
+ * File: loan_app/css/long_form.css
+ **************************************************************/
+
+#root {
+	width: 1000px;
+	
+	margin-left: auto;
+	margin-right: auto;
+	
+	/*
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	*/
+	
+	background-color: #CCCCCC;
+}
+
+#header {
+	width: 1000px;
+}
+
+#header p {
+	font-family: Verdana,Arial,sans-serif;
+}
+
+#header_starting_datetime {
+	width: 1000px;
+}
+
+#header_starting_datetime p {
+	text-align: center;
+	
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+#header_banner {
+	width: 1000px;
+	height: 100px;
+	
+	background-image: url(../media/justclickhereloans_header_large.jpg);
+	background-position: top left;
+	background-repeat: no-repeat;
+}
+
+#long_form_inner_container {
+	width: 900px;
+	height: 815px;
+	
+	margin-left: auto;
+	margin-right: auto;
+
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+#footer_navigation_links {
+	width: 1000px;
+	
+	padding-top: 20px;
+	padding-bottom: 5px;
+}
+
+#footer_navigation_links p {
+	text-align: center;
+	
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+#footer_navigation_links a {
+	font-weight: bold;
+	
+	color: #777777;
+	
+	text-decoration: none;
+}
+
+.field_div {
+	padding-bottom: 15px;
+}
+
+.field_div > p {
+	padding-bottom: 10px;
+}
+
+.field_inner_div {
+	padding-left: 25px;
+}
+
+.panel_navigation {
+	padding-top: 15px;
+	
+	text-align: center;
+}
+
+.panel_previous {
+	padding-right: 10px;
+}
+
+.panel_next {
+	padding-left: 10px;
+}
