@@ -23,9 +23,9 @@
 	<p>Regarding you or any immediate family member:</p>
 	<div id="active_military_inner_div" class="field_inner_div">
 		<input type="radio" id="active_military_no" name="active_military" value="NO" checked="checked" />
-		<label for="active_military_no">NOT active in military</label>
+		<label for="active_military_no">NO, not active in the military</label>
 		<input type="radio" id="active_military_yes" name="active_military" value="YES" />
-		<label for="active_military_yes">Yes, actively serving in military</label>
+		<label for="active_military_yes">Yes, active in the military</label>
 	</div>
 	<script type="text/javascript">
 	//<![CDATA
@@ -54,12 +54,12 @@
 </div>
 
 <div id="direct_deposit_div" class="field_div">
-	<p>Regarding how you will receive your loan:</p>
+	<p>Regarding how you may receive your loan:</p>
 	<div id="direct_deposit_inner_div" class="field_inner_div">
 		<input type="radio" id="direct_deposit_yes" name="direct_deposit" value="YES" checked="checked" />
-		<label for="direct_deposit_yes">YES, I can receive direct deposit funds</label>
+		<label for="direct_deposit_yes">YES, I can accept direct deposit</label>
 		<input type="radio" id="direct_deposit_no" name="direct_deposit" value="NO" />
-		<label for="direct_deposit_no">No, I cannot receive direct deposit funds</label>
+		<label for="direct_deposit_no">No, I cannot accept direct deposit</label>
 	</div>
 	<script type="text/javascript">
 	//<![CDATA
@@ -74,11 +74,11 @@
 	<p>Regarding your source of income:</p>
 	<div id="income_type_inner_div" class="field_inner_div">
 		<input type="radio" id="income_type_employed" name="income_type" value="EMPLOYED" checked="checked" />
-		<label for="income_type_employed">I have regular employment</label>
+		<label for="income_type_employed">I am regularly employed</label>
 		<input type="radio" id="income_type_self_employed" name="income_type" value="SELF EMPLOYED" />
 		<label for="income_type_self_employed">I am self-employed</label>
 		<input type="radio" id="income_type_benefits" name="income_type" value="BENEFITS" />
-		<label for="income_type_benefits">I receive other benefits</label>
+		<label for="income_type_benefits">I am on benefits</label>
 	</div>
 	<script type="text/javascript">
 	//<![CDATA[
@@ -90,12 +90,12 @@
 </div>
 
 <div id="residence_type_div" class="field_div">
-	<p>Regarding your place of residence:</p>
+	<p>Regarding your primary residence:</p>
 	<div id="residence_type_inner_div" class="field_inner_div">
 		<input type="radio" id="residence_type_renter" name="residence_type" value="HOMEOWNER" checked="checked" />
-		<label for="residence_type_renter">I rent my home</label>
+		<label for="residence_type_renter">I RENT my primary residence</label>
 		<input type="radio" id="residence_type_homeowner" name="residence_type" value="RENTER" />
-		<label for="residence_type_homeowner">I own my home</label>
+		<label for="residence_type_homeowner">I OWN my primary residence</label>
 	</div>
 	<script type="text/javascript">
 	//<![CDATA[

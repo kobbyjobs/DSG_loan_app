@@ -18,7 +18,7 @@ var generate_next_global_id = ( function () {
 $( document ).ready( function () {
 	$( '#long_form_inner_container' )
 		.accordion({
-			heightStyle: 'fill'
+			heightStyle: 'content'
 		});
 	
 	$( '#long_form' )

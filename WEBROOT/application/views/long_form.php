@@ -18,7 +18,7 @@ $data = array(
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Easy Cash NOW!</title>
+	<title>EASY Cash NOW!</title>
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	
@@ -70,7 +70,7 @@ $data = array(
 							<?php $this->load->view('identity_information', $data); ?>
 						</div>
 						
-						<h3>Address and Contact Information</h3>
+						<h3>Contact Information and Address</h3>
 						<div id="address_and_contact_information">
 							<?php $this->load->view('address_and_contact_information', $data); ?>
 						</div>

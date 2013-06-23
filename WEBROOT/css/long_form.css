@@ -85,16 +85,20 @@
 
 .field_div > p {
 	padding-bottom: 10px;
+	
+	font-weight: bold;
 }
 
 .field_inner_div {
-	padding-left: 25px;
+	padding-left: 15px;
 }
 
 .panel_navigation {
 	padding-top: 15px;
 	
 	text-align: center;
+	
+	clear:both;
 }
 
 .panel_previous {
@@ -103,4 +107,18 @@
 
 .panel_next {
 	padding-left: 10px;
-}
+}
+
+.field_div_grouping {
+	float: none;
+	
+	clear: both;
+}
+
+.field_div_grouping > .field_div {
+	float: left;
+	
+	margin-right: 35px;
+}
+
+/* End of file: long_form.css */
