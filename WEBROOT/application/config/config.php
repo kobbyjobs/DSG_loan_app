@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'https://secure.cashmoneynow.net/secure/loan_app/';
+$config['base_url']	= 'https://secure.cashmoneynow.net/secure/DSG_loan_app/';
 
 /*
 |--------------------------------------------------------------------------

@@ -25,27 +25,7 @@ class Long_form extends CI_Controller
 			'email' => 'MITHEONEX.PIXEL@EXAMPLE.NET'
 		);
 
-		$this->load->view('long_form', $data);
-	}
-	
-	public function prepop ($transaction_id, $first_name, $last_name, $zipcode, $street_address, $home_phone, $mobile_phone, $email)
-	{
-		// place the prepop information handed into the short form table
-		
-		// create data array for view(s)
-		$data = array(
-			'transaction_id' => $transaction_id,
-			'first_name' => $first_name,
-			'last_name' => $last_name,
-			'zip_code' => $zipcode,
-			'street_address' => $street_address,
-			'home_phone' => $home_phone,
-			'mobile_phone' => $mobile_phone,
-			'email' => $email
-		);
-		
-		// show the form view
-		$this->load->view('long_form', $data);
+		$this->load->view('long_form/main', $data);
 	}
 	
 	public function show ($aff_id, $offer_id, $transaction_id)

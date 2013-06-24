@@ -16,11 +16,90 @@ var generate_next_global_id = ( function () {
 }) ();
 
 $( document ).ready( function () {
-	$( '#long_form_inner_container' )
+	// set up the accordion widget
+	$( '#form_panels' )
 		.accordion({
 			heightStyle: 'content'
 		});
 	
+	// set up the previous/next button click handlers
+	$( '#form_panel_1 a.next' ).button({
+		icons : {
+			secondary : 'ui-icon-arrowthick-1-e'
+		}
+	}).click( function ( event ) {
+		event.preventDefault();
+		$( '#form_panels' ).accordion( 'option', 'active', 1 );
+	});
+	$( '#form_panel_2 a.prev' ).button({
+		icons : {
+			primary : 'ui-icon-arrowthick-1-w'
+		}
+	}).click( function ( event ) {
+		event.preventDefault();
+		$( '#form_panels' ).accordion( 'option', 'active', 0 );
+	});
+	$( '#form_panel_2 a.next' ).button({
+		icons : {
+			secondary : 'ui-icon-arrowthick-1-e'
+		}
+	}).click( function ( event ) {
+		event.preventDefault();
+		$( '#form_panels' ).accordion( 'option', 'active', 2 );
+	});
+	$( '#form_panel_3 a.prev' ).button({
+		icons : {
+			primary : 'ui-icon-arrowthick-1-w'
+		}
+	}).click( function ( event ) {
+		event.preventDefault();
+		$( '#form_panels' ).accordion( 'option', 'active', 1 );
+	});
+	$( '#form_panel_3 a.next' ).button({
+		icons : {
+			secondary : 'ui-icon-arrowthick-1-e'
+		}
+	}).click( function ( event ) {
+		event.preventDefault();
+		$( '#form_panels' ).accordion( 'option', 'active', 3 );
+	});
+	$( '#form_panel_4 a.prev' ).button({
+		icons : {
+			primary : 'ui-icon-arrowthick-1-w'
+		}
+	}).click( function ( event ) {
+		event.preventDefault();
+		$( '#form_panels' ).accordion( 'option', 'active', 2 );
+	});
+	$( '#form_panel_4 a.next' ).button({
+		icons : {
+			secondary : 'ui-icon-arrowthick-1-e'
+		}
+	}).click( function ( event ) {
+		event.preventDefault();
+		$( '#form_panels' ).accordion( 'option', 'active', 4 );
+	});
+	$( '#form_panel_5 a.prev' ).button({
+		icons : {
+			primary : 'ui-icon-arrowthick-1-w'
+		}
+	}).click( function ( event ) {
+		event.preventDefault();
+		$( '#form_panels' ).accordion( 'option', 'active', 3 );
+	});
+	
+	// set up the jQuery UI styled radio buttons
+	$( '.form_panel_buttonset' ).buttonset();
+	
+	// set up next payday calendars
+	$( '#paycheck_calendar_1' ).datepicker();
+	$( '#paycheck_calendar_2' ).datepicker();
+	
+	// set up the long-form submission button
+	$( '#long_form_submit' ).button();
+	
+	// set up the long-form submission handling
+	// for validation, etc.
 	$( '#long_form' )
 		.submit( function ( event ) {
 			var validated = false;

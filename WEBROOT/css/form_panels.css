@@ -1,0 +1,53 @@
+/* css/form_panels.css */
+
+#form_panels {
+	width : 900px;
+	height : 780px;
+	margin-left : auto;
+	margin-right : auto;
+	padding-top : 5px;
+	padding-bottom : 5px;
+}
+
+span.prev {
+	padding-right : 10px;
+}
+
+span.next {
+	padding-left : 10px;
+}
+
+.form_panel > .navigation {
+	padding-top : 15px;
+	clear : both;
+	text-align : center;
+}
+
+.form_panel p {
+	padding-bottom: 5px;
+	font-weight: bold;
+}
+
+.form_panel_row {
+	float: left;
+	padding-left: 15px;
+}
+
+.clearing {
+	height: 0px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	float: none;
+	clear: both;
+}
+
+#form_panel_1 > .form_panel_buttonset {
+	padding-bottom: 10px;
+	text-align : center;
+}
+
+#form_panel_1 > p {
+	padding-bottom : 5px;
+}
+
+/* End of File */
