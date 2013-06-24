@@ -60,7 +60,7 @@ $data = array(
 					<?php $this->load->view('hidden_fields', $data); ?>
 					
 					<div id="long_form_inner_container">
-						<h3>Preliminary Questions</h3>
+						<h3>Preliminary Information</h3>
 						<div id="preliminary_questions">
 							<?php $this->load->view('preliminary_questions'); ?>
 						</div>
@@ -70,7 +70,7 @@ $data = array(
 							<?php $this->load->view('identity_information', $data); ?>
 						</div>
 						
-						<h3>Contact Information and Address</h3>
+						<h3>Address and Contact Information</h3>
 						<div id="address_and_contact_information">
 							<?php $this->load->view('address_and_contact_information', $data); ?>
 						</div>
