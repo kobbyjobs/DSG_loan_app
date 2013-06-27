@@ -92,8 +92,14 @@ $( document ).ready( function () {
 	$( '.form_panel_buttonset' ).buttonset();
 	
 	// set up next payday calendars
-	$( '#paycheck_calendar_1' ).datepicker();
-	$( '#paycheck_calendar_2' ).datepicker();
+	$( '#paycheck_calendar_1' ).datepicker({
+		altField: '#date_of_next_paycheck_1',
+		altFormat: 'yy-mm-dd'
+	});
+	$( '#paycheck_calendar_2' ).datepicker({
+		altField: '#date_of_next_paycheck_2',
+		altFormat: 'yy-mm-dd'
+	});
 	
 	// set up the long-form submission button
 	$( '#long_form_submit' ).button();
@@ -106,7 +112,7 @@ $( document ).ready( function () {
 			
 			//event.preventDefault();
 			
-			validated = true;
+			validated = validate_all_form_fields();
 			
 			// prevent double-click submission
 			//$( '#long_form_submit' ).hide();
@@ -225,9 +231,33 @@ $( document ).ready( function () {
 				}) ( p_id_str ), 1000 )
 				
 				// proceed with form submission
+				setTimeout (ajax_form_submit, 2000);
+				
 				return false;
 			}
 			
 			return false;
 		});
-});
+});
+
+function validate_all_form_fields () {
+	return true;
+}
+
+function ajax_form_submit () {
+	form_data = $( '#long_form' ).serialize();
+	
+	$.ajax({
+		type: 'POST',
+		url: '/secure/DSG_loan_app/index.php/long_form/post_and_continue/',
+		dataType: 'json',
+		data: form_data
+	}).done( function ( data, text_status, jqxhr_obj ) {
+		//alert( data['redirect_url']  );
+		setTimeout( function () {
+			window.location.href = data['redirect_url'];
+		}, 5000 );
+	}).fail( function ( jqxhr_obj, text_status, error_thrown ) {
+		alert( 'There was a problem with submitting your application. Please try again later.' );
+	});
+}

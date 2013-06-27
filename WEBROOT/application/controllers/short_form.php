@@ -54,7 +54,7 @@ class Short_form extends CI_Controller
 		$this->load->helper('url');
 		
 		$target_offer_id = $this->input->get('target_offer_id');
-		$redirect_url = "http://link.go2oursite.net/aff_c?offer_id=$target_offer_id&aff_id=$aff_id&short_form_id=$short_form_id";
+		$redirect_url = "http://link.go2oursite.net/aff_c?offer_id=$target_offer_id&aff_id=$aff_id&url_id=21&short_form_id=$short_form_id";
 		redirect($redirect_url, 'location', 302);
 	}
 	

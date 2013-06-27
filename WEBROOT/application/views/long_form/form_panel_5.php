@@ -13,7 +13,7 @@
 	
 	<div class="form_panel_row">
 		<p>Bank Name</p>
-		<input type="text" id="bank_name" name="bank_name" maxlength="50" class="ui-widget ui-corner-all" style="width:250px;" value="" />
+		<input type="text" id="bank_name" name="bank_name" maxlength="50" class="ui-widget ui-corner-all" style="width:400px;" value="" />
 	</div>
 	<div class="form_panel_row">
 		<p>Bank Phone</p>
