@@ -42,7 +42,7 @@ class Short_form extends CI_Controller
 		$short_form_id = $this->db->insert_id();
 		
 		// fire postback url with transaction id
-		$postback_url = "http://link.go2oursite.net/SP6D?transaction_id=$transaction_id";
+		$postback_url = "http://link.go2oursite.net/SP6D?adv_sub=$email&transaction_id=$transaction_id";
 		//$response = http_get($postback_url);
 		$response = file_get_contents($postback_url);
 		if ( ! $response ) {

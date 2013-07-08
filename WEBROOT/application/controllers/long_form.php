@@ -225,6 +225,27 @@ class Long_form extends CI_Controller
 		$this->db->insert('long_forms', $data);
 		$long_form_id = $this->db->insert_id();
 		
+		
+		$ileads_passwords = array(
+			1 => 'dd0d7afa2414fc1d3ddc18c87351478f',
+			// Channel A - Tree 1
+			2 => '39ee7fc35a742eca693ccc1e90406c45',
+			// Channel A - Tree 2
+			3 => 'a211f5cdb4c7165d2ffe1a47bb5e6288',
+			// Channel A - Tree 3
+			0 => 'c21fc7ff765648e28f514cb0af8e219e'//,
+			// Channel A - Tree 4
+			//0 => '69c0ad841804b55c5447fd118b54d7de'
+			// Channel A - Tree 5
+		);
+		
+		
+		//$ileads_passwords = $this->_load_ileads_passwords_xml();
+		
+		$index = $long_form_id % count($ileads_passwords);
+		$ileads_password = $ileads_passwords[$index];
+		$data['ileads_password'] = $ileads_password;
+		
 		$data['social_security_number'] = $social_security_number;
 		$data['bank_account_number'] = $bank_account_number;
 		if ( $paycheck_frequency == 'WEEKLY' ) {
@@ -260,17 +281,17 @@ class Long_form extends CI_Controller
 		curl_close($handle);
 		
 		$xml = simplexml_load_string($response);
-		$success = $xml->response->success;
+		$success = (string) $xml->success;
 		$redirect_url = '';
 		$price = 0.00;
 		$application_status = '';
 		
 		if ($success == 'true') {
-			$redirect_url = $xml->response->redirect;
-			$price = $xml->response->price;
+			$redirect_url = (string) $xml->redirect;
+			$price = (float) $xml->price;
 			$application_status = 'ACCEPTED';
 			
-			$postback_url = "http://link.go2oursite.net/SP6F?amount=$price&transaction_id=$transaction_id";
+			$postback_url = "http://link.go2oursite.net/SP6F?adv_sub=$email&amount=$price&transaction_id=$transaction_id";
 			file_get_contents($postback_url);
 		} else {
 			$redirect_url = "http://delta.rspcdn.com/xprr/red/PID/1453/SID/$aff_id?fname=$first_name&lname=$last_name&email=" . urlencode($email);
@@ -308,12 +329,80 @@ class Long_form extends CI_Controller
 		echo $response;
 	}
 	
+	public function update_ileads_passwords ($secret)
+	{
+		$my_secret = 'd3ddc18c87351478fdb4c7165e7fcc21';
+		if ($secret != $my_secret) {
+			die;
+		}
+		
+		$tree_1 = $this->input->post('tree_1');
+		$tree_2 = $this->input->post('tree_2');
+		$tree_3 = $this->input->post('tree_3');
+		$tree_4 = $this->input->post('tree_4');
+		
+		$this->_store_ileads_passwords_xml ($tree_1, $tree_2, $tree_3, $tree_4);
+		
+		$this->load->view('ileads_passwords_updated');
+	}
+	
+	public function show_update_ileads_passwords ($secret)
+	{
+		$my_secret = '478fdb4c7165e7fcc21d3ddc18c87351';
+		if ($secret != $my_secret) {
+			die;
+		}
+		
+		$trees = $this->_load_ileads_passwords_xml();
+		$data = array(
+			'tree_1' => $trees[1],
+			'tree_2' => $trees[2],
+			'tree_3' => $trees[3],
+			'tree_4' => $trees[0],
+			'secret' => 'd3ddc18c87351478fdb4c7165e7fcc21'
+		);
+		$this->load->view('update_ileads_passwords', $data);
+	}
+	
 	private function _generate_security_token ($id)
 	{
 		$security_token = 'DSG|' . $id . time();
 		$security_token = md5($security_token);
 		
 		return $security_token;
+	}
+	
+	private function _load_ileads_passwords_xml ()
+	{
+		$this->load->helper('file');
+		
+		$path = './etc/round_robin_config.xml';
+		$str = read_file($path);
+		$xml = simplexml_load_string($str);
+		$trees = array();
+		
+		foreach ($xml->tree as $tree) {
+			$ordinal = (int) $tree['ordinal'];
+			$password = (string) $tree;
+			$trees[$ordinal] = $password;
+		}
+		
+		return $trees;
+	}
+	
+	private function _store_ileads_passwords_xml ($tree_1, $tree_2, $tree_3, $tree_4)
+	{
+		$this->load->helper('file');
+		
+		$path = './etc/round_robin_config.xml';
+		$data = array(
+			'tree_1' => $tree_1,
+			'tree_2' => $tree_2,
+			'tree_3' => $tree_3,
+			'tree_4' => $tree_4
+		);
+		$str = $this->load->view('round_robin_config_xml', $data, true);
+		write_file($path, $str);
 	}
 }
 
