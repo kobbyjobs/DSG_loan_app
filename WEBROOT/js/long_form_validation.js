@@ -156,21 +156,121 @@ $( document ).ready( function () {
 	});
 	
 	////////////////////////////////////////////////////////////
+	// Define some validation rules for each panel's form fields
+	////////////////////////////////////////////////////////////
+	
+	var validation_rules_1 = {
+		// empty, panel one has no rules (so far)
+	};
+	
+	var validation_rules_2 = {
+		first_name : {
+			sel : "#first_name",
+			rex : /[A-Za-z]+/g,
+			msg : "First name must be some combination of upper-case and lower-case letters"
+		},
+		middle_initial : {
+			sel : "#middle_initial",
+			rex : /[A-Z]?/g,
+			msg : "Middle initial is optional, but must be only one upper-case letter if given"
+		},
+		last_name : {
+			sel : "#last_name",
+			rex : /[A-Za-z]+/g,
+			msg : "Last name must be some combination of upper-case and lower-case letters"
+		},
+		social_security_number : {
+			sel : "#social_security_number",
+			rex : /[0-9]{9}/g,
+			msg : "You must enter 9 digits for your social security number"
+		},
+		drivers_license_id_number : {
+			sel : "#drivers_license_id_number",
+			rex : /[0-9A-Z\-]+/g,
+			msg : "Driver's license or ID number may be entered as a combination of upper-case letters, digits and dashes (if necessary)"
+		}
+	};
+	
+	var validation_rules_3 = {
+	
+	};
+	
+	var validation_rules_4 = {
+	
+	};
+	
+	var validation_rules_5 = {
+	
+	};
+	
+	////////////////////////////////////////////////////////////
+	// Define a function which shall act as an "engine" to 
+	// execute the defined validation rules
+	////////////////////////////////////////////////////////////
+	
+	var execute_validation_rules = function ( evt, rule_set ) {
+		for ( field in rule_set ) {
+			if ( evt.isDefaultPrevented () ) {
+				// if the default event action has already been canceled,
+				// it would be "unwise" to proceed further...
+				break;
+			}
+			
+			var rule = rule_set[field];
+			var $sel = $( rule['sel'] );
+			var rex = rule['rex'];
+			var msg = rule['msg'];
+			
+			console.log( 'field = ' + field + '\nrex = ' + rex + '\n$sel.val() = ' + $sel.val() );
+			console.log( 'rex.lastIndex = ' + rex.lastIndex + '\nResetting rex.lastIndex to 0...' );
+			rex.lastIndex = 0;
+			console.log( 'rex.lastIndex = ' + rex.lastIndex );
+			
+			if (! rex.test( $sel.val() )) {
+				evt.preventDefault();
+				
+				var oldTitle = $sel.attr( 'title' );
+				$sel.data( 'oldTitle', oldTitle );
+				$sel.attr( 'title', msg );
+				$sel.tooltip({
+					tooltipClass : 'ui-state-error'
+				});
+				$sel.bind( 'blur.removeError', function () {
+					// could have called this variable oldTitle as well, but using
+					// tmp instead to avoid any sort of subtle confusion as to scope
+					var tmp = $( this ).data( 'oldTitle' );
+					$( this ).removeData( 'oldTitle' );
+					$( this ).tooltip( 'destroy' );
+					$( this ).attr( 'title', tmp );
+					$( this ).unbind( 'blur.removeError' );
+				});
+				$sel.focus();
+				$sel.tooltip( 'open' );
+			}
+		}
+	};
+	
+	////////////////////////////////////////////////////////////
 	// Bind to the form panels' beforeActivate event to do some
 	// form validation tasks
 	////////////////////////////////////////////////////////////
 	
-	$( '#form_panels' ).bind( 'accordionbeforeactivate', function ( event, ui ) {
+	$( '#form_panels' ).bind( 'accordionbeforeactivate', function ( evt, ui ) {
 		if ( ui.oldPanel.is( '#form_panel_1' ) ) {
 			console.log( 'Validating form panel #1...' );
+			execute_validation_rules( evt, validation_rules_1 );
 		} else if ( ui.oldPanel.is( '#form_panel_2' ) ) {
 			console.log( 'Validating form panel #2...' );
+			execute_validation_rules( evt, validation_rules_2 );
 		} else if ( ui.oldPanel.is( '#form_panel_3' ) ) {
 			console.log( 'Validating form panel #3...' );
+			execute_validation_rules( evt, validation_rules_3 );
 		} else if ( ui.oldPanel.is( '#form_panel_4' ) ) {
 			console.log( 'Validating form panel #4...' );
+			execute_validation_rules( evt, validation_rules_4 );
 		} else if ( ui.oldPanel.is( '#form_panel_5' ) ) {
 			console.log( 'Validating form panel #5...' );
+			execute_validation_rules( evt, validation_rules_5 );
 		}
 	});
 });
