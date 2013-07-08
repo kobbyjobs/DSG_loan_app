@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "update_ileads_passwords"
+AuthUserFile "/home/cashmone/.htpasswds/public_html/secure/_dsg/update_ileads_passwords/passwd"
+require valid-user
