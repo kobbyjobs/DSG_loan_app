@@ -166,33 +166,68 @@ $( document ).ready( function () {
 	var validation_rules_2 = {
 		first_name : {
 			sel : "#first_name",
-			rex : /[A-Za-z]+/g,
-			msg : "First name must be some combination of upper-case and lower-case letters"
+			rex : /^[A-Z\-]+$/gi,
+			msg : "First name must be some combination of only letters (hyphens are permitted also)"
 		},
 		middle_initial : {
 			sel : "#middle_initial",
-			rex : /[A-Z]?/g,
-			msg : "Middle initial is optional, but must be only one upper-case letter if given"
+			rex : /^[A-Z]?$/gi,
+			msg : "Middle initial is optional, but must be only one letter if given"
 		},
 		last_name : {
 			sel : "#last_name",
-			rex : /[A-Za-z]+/g,
-			msg : "Last name must be some combination of upper-case and lower-case letters"
+			rex : /^[A-Z\-]+$/gi,
+			msg : "Last name must be some combination of only letters (hyphens are permitted also)"
 		},
 		social_security_number : {
 			sel : "#social_security_number",
-			rex : /[0-9]{9}/g,
-			msg : "You must enter 9 digits for your social security number"
+			rex : /^[0-9]{9}$/g,
+			msg : "You must enter nine digits for your social security number"
 		},
 		drivers_license_id_number : {
 			sel : "#drivers_license_id_number",
-			rex : /[0-9A-Z\-]+/g,
+			rex : /^[0-9A-Z\-]+$/g,
 			msg : "Driver's license or ID number may be entered as a combination of upper-case letters, digits and dashes (if necessary)"
 		}
 	};
 	
 	var validation_rules_3 = {
-	
+		email : {
+			sel : "#email",
+			// See: http://www.regular-expressions.info/email.html
+			rex : /^[A-Z0-9._%+\-]+@[A-Z0-9.\-]+\.[A-Z]{2,4}$/gi,
+			msg : "You must enter a valid e-mail address"
+		},
+		home_phone : {
+			sel : "#home_phone",
+			rex : /^[2-9]{1}[0-9]{9}$/g,
+			msg : "You must enter a valid home/primary phone number"
+		},
+		mobile_phone : {
+			sel : "#mobile_phone",
+			rex : /^([2-9]{1}[0-9]{9}|.{0,0})$/g,
+			msg : "You must enter a valid mobile phone number, or leave this field blank"
+		},
+		street_address : {
+			sel : "#street_address",
+			rex : /^[A-Z0-9.\-,&# ]+$/gi,
+			msg : "You must enter a valid street address"
+		},
+		city : {
+			sel : "#city",
+			rex : /^[A-Z\- &]+$/gi,
+			msg : "You must enter a valid city name"
+		},
+		zip_code : {
+			sel : "#zip_code",
+			rex : /^[0-9]{5}$/g,
+			msg : "You must enter a valid five digit zip code"
+		},
+		months_at_address : {
+			sel : "#months_at_address",
+			rex : /^[1-9]+[0-9]*$/g,
+			msg : "Length of time lived at current address must be more than 0 years and 0 months"
+		}
 	};
 	
 	var validation_rules_4 = {
