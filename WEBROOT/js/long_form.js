@@ -19,7 +19,8 @@ $( document ).ready( function () {
 	// set up the accordion widget
 	$( '#form_panels' )
 		.accordion({
-			heightStyle: 'content'
+			heightStyle : 'content',
+			collapsible : true
 		});
 	
 	// set up the previous/next button click handlers
@@ -110,6 +111,8 @@ $( document ).ready( function () {
 		.submit( function ( event ) {
 			var validated = false;
 			
+			$( '#form_panels' ).accordion( 'option', 'active', false );
+			
 			//event.preventDefault();
 			
 			validated = validate_all_form_fields();
@@ -163,7 +166,7 @@ $( document ).ready( function () {
 				var span_id_str = generate_next_global_id();
 				var p_id_str = generate_next_global_id();
 				
-				$( '<div id="' + div_id_str + '" title="Loan Application Processing"><p style="padding-top: 25px;"><span id="' + span_id_str + '" class="ui-icon ui-icon-arrowrefresh-n-1" style="float: left; margin: 0px 7px 20px 0px;"></span>Please be patient while your application is being processed...</p><p id="' + p_id_str + '" style="text-align: center; font-family: Courier New,Courier,monospance; font-voice: bold; font-size: 48px; padding-top: 25px; padding-bottom: 15px;"><span class="minutes">0</span> : <span class="seconds">00</span></p></div>' )
+				$( '<div id="' + div_id_str + '" title="Loan Application Processing"><p style="padding-top: 25px;"><span id="' + span_id_str + '" class="ui-icon ui-icon-arrowrefresh-n-1" style="float: left; margin: 0px 7px 20px 0px;"></span>Please be patient while your application is being processed...</p><p id="' + p_id_str + '" style="text-align: center; font-family: Courier New,Courier,monospance; font-weight: bold; font-size: 48px; padding-top: 25px; padding-bottom: 15px;"><span class="minutes">0</span> : <span class="seconds">00</span></p></div>' )
 					.insertAfter( '#root' )
 					.dialog({
 						width: 625,

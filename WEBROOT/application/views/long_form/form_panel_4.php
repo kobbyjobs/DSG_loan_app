@@ -34,7 +34,7 @@
 		</select>
 		<select id="date_of_hire_day" name="date_of_hire_day" class="ui-widget ui-corner-all">
 			<?php for ($i = 1; $i <= 31; $i++) { ?>
-				<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+				<option value="<?php printf ("%02d", $i); ?>"><?php echo $i; ?></option>
 			<?php } ?>
 		</select>
 		<select id="date_of_hire_year" name="date_of_hire_year" class="ui-widget ui-corner-all">

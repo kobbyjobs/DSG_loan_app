@@ -47,11 +47,11 @@
 		</select>
 		<select id="date_of_birth_day" name="date_of_birth_day" class="ui-widget ui-corner-all">
 			<?php for ($i = 1; $i <= 31; $i++) { ?>
-				<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+				<option value="<?php printf ("%02d", $i); ?>"><?php echo $i; ?></option>
 			<?php } ?>
 		</select>
 		<select id="date_of_birth_year" name="date_of_birth_year" class="ui-widget ui-corner-all">
-			<?php for ($i = 1998; $i > 1900; $i--) { ?>
+			<?php for ($i = 1995; $i > 1920; $i--) { ?>
 				<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
 			<?php } ?>
 		</select>

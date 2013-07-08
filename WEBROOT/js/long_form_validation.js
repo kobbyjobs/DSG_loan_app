@@ -3,6 +3,12 @@
 ////////////////////////////////////////////////////////////////
 
 $( document ).ready( function () {
+
+	////////////////////////////////////////////////////////////
+	// Set up and configure the form fields on which the jQuery
+	// inputmask plugin will be used
+	////////////////////////////////////////////////////////////
+
 	$( '#first_name' ).inputmask( 'mask', {
 		'mask': 'A[AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]',
 		'autoUnmask': true,
@@ -31,8 +37,8 @@ $( document ).ready( function () {
 		'autoUnmask': true,
 		'clearIncomplete': true,
 		'onincomplete': function () {
-			alert( 'You must enter a social security number!' );
-			$( '#social_security_number' ).focus();
+			//alert( 'You must enter a social security number!' );
+			//$( '#social_security_number' ).focus();
 		}
 	});
 	
@@ -53,8 +59,8 @@ $( document ).ready( function () {
 		'autoUnmask': true,
 		'clearIncomplete': true,
 		'onincomplete': function () {
-			alert( 'You must enter a home phone number!' );
-			$( '#home_phone' ).focus();
+			//alert( 'You must enter a home phone number!' );
+			//$( '#home_phone' ).focus();
 		}
 	});
 	
@@ -73,8 +79,8 @@ $( document ).ready( function () {
 		'autoUnmask': true,
 		'clearIncomplete': true,
 		'onincomplete': function () {
-			alert( 'You must enter a zip code!' );
-			$( '#zip_code' ).focus();
+			//alert( 'You must enter a zip code!' );
+			//$( '#zip_code' ).focus();
 		}
 	});
 	
@@ -85,8 +91,8 @@ $( document ).ready( function () {
 		'autoUnmask': true,
 		'clearIncomplete': true,
 		'onincomplete': function () {
-			alert( 'You must enter an employer phone number!' );
-			$( '#employer_phone' ).focus();
+			//alert( 'You must enter an employer phone number!' );
+			//$( '#employer_phone' ).focus();
 		}
 	});
 	
@@ -107,8 +113,8 @@ $( document ).ready( function () {
 		'autoUnmask': true,
 		'clearIncomplete': true,
 		'onincomplete': function () {
-			alert( 'You must enter your bank account routing number!' );
-			$( '#bank_routing_number' ).focus();
+			//alert( 'You must enter your bank account routing number!' );
+			//$( '#bank_routing_number' ).focus();
 		},
 		'oncomplete': function () {
 			$.ajax({
@@ -144,8 +150,27 @@ $( document ).ready( function () {
 		'autoUnmask': true,
 		'clearIncomplete': true,
 		'onincomplete': function () {
-			alert( 'You must enter a bank phone number!' );
-			$( '#bank_phone' ).focus();
+			//alert( 'You must enter a bank phone number!' );
+			//$( '#bank_phone' ).focus();
+		}
+	});
+	
+	////////////////////////////////////////////////////////////
+	// Bind to the form panels' beforeActivate event to do some
+	// form validation tasks
+	////////////////////////////////////////////////////////////
+	
+	$( '#form_panels' ).bind( 'accordionbeforeactivate', function ( event, ui ) {
+		if ( ui.oldPanel.is( '#form_panel_1' ) ) {
+			console.log( 'Validating form panel #1...' );
+		} else if ( ui.oldPanel.is( '#form_panel_2' ) ) {
+			console.log( 'Validating form panel #2...' );
+		} else if ( ui.oldPanel.is( '#form_panel_3' ) ) {
+			console.log( 'Validating form panel #3...' );
+		} else if ( ui.oldPanel.is( '#form_panel_4' ) ) {
+			console.log( 'Validating form panel #4...' );
+		} else if ( ui.oldPanel.is( '#form_panel_5' ) ) {
+			console.log( 'Validating form panel #5...' );
 		}
 	});
 });
