@@ -29,9 +29,12 @@ $data = array(
 	
 	<script type="text/javascript" src="<?php echo base_url('js/jquery-1.10.1.min.js'); ?>"></script>
 	<script type="text/javascript" src="<?php echo base_url('js/jquery-ui-1.10.3.custom.min.js'); ?>"></script>
+	
 	<script type="text/javascript" src="<?php echo base_url('js/jquery.inputmask.bundle.min.js'); ?>"></script>
 	<script type="text/javascript" src="<?php echo base_url('js/jquery.datax_pixel.js'); ?>"></script>
+	
 	<script type="text/javascript" src="<?php echo base_url('js/long_form.js'); ?>"></script>
+	<script type="text/javascript" src="<?php echo base_url('js/long_form_supporting.js'); ?>"></script>
 	<script type="text/javascript" src="<?php echo base_url('js/long_form_validation.js'); ?>"></script>
 	
 	<!-- set up the datax jQuery plugin -->
@@ -55,7 +58,7 @@ $data = array(
 				<p><?php echo date('l F j, Y g:i:sa'); ?></p>
 			</div>
 			
-			<div id="header_banner">&nbsp;</div>
+			<div id="header_banner" style="background-image:url(<?php echo base_url('media/justclickhereloans_header_large.jpg'); ?>);">&nbsp;</div>
 		</div>
 		
 		<div id="content">
