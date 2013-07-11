@@ -95,11 +95,17 @@ $( document ).ready( function () {
 	// set up next payday calendars
 	$( '#paycheck_calendar_1' ).datepicker({
 		altField: '#date_of_next_paycheck_1',
-		altFormat: 'yy-mm-dd'
+		altFormat: 'yy-mm-dd',
+		minDate : 1,
+		maxDate : 90,
+		beforeShowDay : $.datepicker.noWeekends
 	});
 	$( '#paycheck_calendar_2' ).datepicker({
 		altField: '#date_of_next_paycheck_2',
-		altFormat: 'yy-mm-dd'
+		altFormat: 'yy-mm-dd',
+		minDate : 1,
+		maxDate : 90,
+		beforeShowDay : $.datepicker.noWeekends
 	});
 	
 	// set up the long-form submission button
