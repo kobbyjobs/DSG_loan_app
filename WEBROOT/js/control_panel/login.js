@@ -4,10 +4,13 @@
 // Author: eamohl@leadsanddata.net
 //
 // Created: July 15, 2013
+//
+// Description:
+//
 ////////////////////////////////////////////////////////////////////////////////
 
 _DSG.control_panel.login = function ( selector ) {
-	this.selector;
+	this.selector = selector;
 	
 	this.base_url = _DSG.WEBROOT + 'index.php/control_panel/login/';
 	
