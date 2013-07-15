@@ -71,6 +71,56 @@ class Control_panel extends CI_Controller
 	
 	}
 	
+	public function create_site_configuration ()
+	{
+	
+	}
+	
+	public function site_configurations ()
+	{
+		$this->load->model( 'site_configuration' );
+		
+		$site_configurations = $this->site_configuration->list_all();
+		$json = json_encode( array( 'site_configurations' => $site_configurations ));
+		
+		$this->output->set_content_type( 'application/json' );
+		$this->output->set_output( $json );
+	}
+	
+	public function site_configuration ( $id )
+	{
+		$this->load->model( 'site_configuration' );
+		
+		$this->site_configuration->id = $id;
+		$this->site_configuration->load();
+		
+		$json = json_encode( array(
+			'site_configuration' => array (
+				'id' => $this->site_configuration->id,
+				'name' => $this->site_configuration->name,
+				'configuration_file' => $this->site_configuration->configuration_file,
+				'created' => $this->site_configuration->created,
+				'landing' => $this->site_configuration->landing,
+				'short_form' => $this->site_configuration->short_form,
+				'long_form' => $this->site_configuration->long_form,
+				'banner' => $this->site_configuration->banner,
+				'ping_tree_1' => $this->site_configuration->ping_tree_1,
+				'ping_tree_2' => $this->site_configuration->ping_tree_2,
+				'ping_tree_3' => $this->site_configuration->ping_tree_3,
+				'ping_tree_4' => $this->site_configuration->ping_tree_4,
+				'mutex_meta' => $this->site_configuration->mutex_meta
+			)
+		));
+		
+		$this->output->set_content_type( 'application/json' );
+		$this->output->set_output( $json );
+	}
+	
+	public function update_site_configuration ()
+	{
+	
+	}
+	
 	private function __check_user_logged_in ()
 	{
 		if ( ! $this->session->userdata( 'uid' ) ) {
