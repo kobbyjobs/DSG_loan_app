@@ -1,7 +1,14 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-////////////////////////////////////////////////////////////////
-// File: application/controller/control_panel.php
-////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// File: WEBROOT/application/controller/control_panel.php
+//
+// Author: eamohl@leadsanddata.net
+//
+// Created: July 15, 2013
+//
+// Description:
+//
+////////////////////////////////////////////////////////////////////////////////
 
 class Control_panel extends CI_Controller
 {
@@ -10,24 +17,28 @@ class Control_panel extends CI_Controller
 		parent::__construct();
 		
 		$this->load->library('session');
-		$this->load->helper('url');
+		//$this->load->helper('url');
 		$this->load->database();
 	}
 	
 	public function index ()
 	{
-		$url = "https://secure.cashmoneynow.net/secure/DSG_loan_app/index.php/control_panel/";
+		$this->load->helper( 'url' );
+		//$url = "https://secure.cashmoneynow.net/secure/DSG_loan_app/index.php/control_panel/";
 		
 		if ( $this->__check_user_logged_in() ) {
-			redirect( $url . 'dashboard/' );
+			//redirect( $url . 'dashboard/' );
+			redirect( site_url( '/control_panel/dashboard/' ));
 			die;
+		} else {
+			$this->load->view( 'control_panel/login' );
 		}
-		
-		$this->load->view( 'control_panel/login' );
 	}
 	
 	public function login ( $username, $password )
 	{
+		$this->load->helper( 'url' );
+		
 		$_username = urldecode( $username );
 		$_password = urldecode( $password );
 		$this->db->from( 'users' );
@@ -36,34 +47,39 @@ class Control_panel extends CI_Controller
 		$query = $this->db->get();
 		$row = $query->row();
 		
-		//if ( true ) {
-			//echo "$username \n\n $password \n\n";
-			//echo $row->username . " \n\n " . $row->password . " \n\n ";
-			//die;
 		if ( $_password == $row->password ) {
 			$this->session->set_userdata( 'uid', $row->id );
-			redirect( "https://secure.cashmoneynow.net/secure/DSG_loan_app/index.php/control_panel/dashboard/" );
+			//redirect( "https://secure.cashmoneynow.net/secure/DSG_loan_app/index.php/control_panel/dashboard/" );
+			redirect( site_url( '/control_panel/dashboard/' ));
 			die;
 		} else {
-			redirect( "https://secure.cashmoneynow.net/secure/DSG_loan_app/index.php/control_panel/" );
+			//redirect( "https://secure.cashmoneynow.net/secure/DSG_loan_app/index.php/control_panel/" );
+			redirect( site_url( '/control_panel/' ));
 			die;
 		}
 	}
 	
 	public function logout ()
 	{
+		$this->load->helper( 'url' );
+		
 		$this->session->sess_destroy();
-		redirect( "https://secure.cashmoneynow.net/secure/DSG_loan_app/index.php/control_panel/" );
+		//redirect( "https://secure.cashmoneynow.net/secure/DSG_loan_app/index.php/control_panel/" );
+		redirect( site_url( '/control_panel' ));
+		die;
 	}
 	
 	public function dashboard ()
 	{
-		if ( ! $this->__check_user_logged_in() ) {
-			redirect( "https://secure.cashmoneynow.net/secure/DSG_loan_app/index.php/control_panel/" );
-			die;
-		}
+		$this->load->helper( 'url' );
 		
-		$this->load->view( 'control_panel/dashboard' );
+		if ( ! $this->__check_user_logged_in() ) {
+			//redirect( "https://secure.cashmoneynow.net/secure/DSG_loan_app/index.php/control_panel/" );
+			redirect( site_url( '/control_panel/' ));
+			die;
+		} else {
+			$this->load->view( 'control_panel/dashboard' );
+		}
 	}
 	
 	public function section ( $id )
@@ -73,7 +89,21 @@ class Control_panel extends CI_Controller
 	
 	public function create_site_configuration ()
 	{
-	
+		$this->load->model( 'site_configuration' );
+		
+		$this->site_configuration->from_post();
+		
+		$this->site_configuration->create();
+		
+		$json = json_encode( array(
+			'status' => array (
+				'code' => 0,
+				'message' => 'Successfully created site configuration'
+			)
+		));
+		
+		$this->output->set_content_type( 'application/json' );
+		$this->output->set_output( $json );
 	}
 	
 	public function site_configurations ()
@@ -81,6 +111,7 @@ class Control_panel extends CI_Controller
 		$this->load->model( 'site_configuration' );
 		
 		$site_configurations = $this->site_configuration->list_all();
+		
 		$json = json_encode( array( 'site_configurations' => $site_configurations ));
 		
 		$this->output->set_content_type( 'application/json' );
@@ -116,9 +147,24 @@ class Control_panel extends CI_Controller
 		$this->output->set_output( $json );
 	}
 	
-	public function update_site_configuration ()
+	public function update_site_configuration ( $id )
 	{
-	
+		$this->load->model( 'site_configuration' );
+		
+		$this->site_configuration->id = $id;
+		$this->site_configuration->from_post();
+		
+		$this->site_configuration->update();
+		
+		$json = json_encode( array(
+			'status' => array (
+				'code' => 0,
+				'message' => 'Successfully updated site configuration'
+			)
+		));
+		
+		$this->output->set_content_type( 'application/json' );
+		$this->output->set_output( $json );
 	}
 	
 	private function __check_user_logged_in ()
@@ -131,6 +177,6 @@ class Control_panel extends CI_Controller
 	}
 }
 
-////////////////////////////////////////////////////////////////
-// End of file: application/controller/control_panel.php
-////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// End of file: control_panel.php
+////////////////////////////////////////////////////////////////////////////////

@@ -1,8 +1,18 @@
 <?php if ( ! defined( 'BASEPATH' ) ) exit( 'No direct script access allowed' );
+////////////////////////////////////////////////////////////////////////////////
+// File: WEBROOT/application/models/site_configuration.php
+//
+// Author: eamohl@leadsanddata.net
+//
+// Created: July 15, 2013
+//
+// Description:
+//
+////////////////////////////////////////////////////////////////////////////////
 
 class Site_configuration extends CI_Model
 {
-	public $id = -1;
+	public $id;
 	public $name;
 	public $configuration_file;
 	public $created;
@@ -25,6 +35,8 @@ class Site_configuration extends CI_Model
 	{
 		parent::__construct();
 		
+		$this->id = -1;
+		
 		$this->mutex_meta = array(
 			'sem_key' => -1,
 			'shm_key' => -1,
@@ -45,11 +57,6 @@ class Site_configuration extends CI_Model
 		foreach ( $query->result() as $row ) {
 			$site_configurations[( int ) $row->id] = $row->name;
 		}
-		
-		//$json = json_encode( array( 'site_configurations' => $site_configurations ) );
-		
-		//$this->output->set_content_type( 'application/json' );
-		//$this->output->set_output( $json );
 		
 		return $site_configurations;
 	}
@@ -73,14 +80,6 @@ class Site_configuration extends CI_Model
 		$this->short_form = ( int ) $xml->{'short-form'};
 		$this->long_form = ( int ) $xml->{'long-form'};
 		$this->banner = ( string ) $xml->{'banner'};
-		
-		//print_r( $xml->xpath( '//ping-tree[@order="1"]' ) );
-		//die;
-		
-		//$this->ping_tree_1 = ( string ) (( $xml->xpath( '//ping-tree[@order="1"]' ))[0] );
-		//$this->ping_tree_2 = ( string ) (( $xml->xpath( '//ping-tree[@order="2"]' ))[0] );
-		//$this->ping_tree_3 = ( string ) (( $xml->xpath( '//ping-tree[@order="3"]' ))[0] );
-		//$this->ping_tree_4 = ( string ) (( $xml->xpath( '//ping-tree[@order="4"]' ))[0] );
 		
 		$_xml = $xml->xpath( '//ping-tree[@order="1"]' );
 		$this->ping_tree_1 = ( string ) $_xml[0];
@@ -111,4 +110,7 @@ class Site_configuration extends CI_Model
 	{
 	
 	}
-}
+}
+////////////////////////////////////////////////////////////////////////////////
+// End of file: site_configuration.php
+////////////////////////////////////////////////////////////////////////////////
