@@ -1,8 +1,19 @@
-<?php if ( ! defined('BASEPATH') ) exit( 'No direct script access allowed' ); ?>
-<?php echo '<?xml version="1.0" encoding="UTF-8"?' . '>'; ?>
+<?php if ( ! defined( 'BASEPATH' )) exit( 'No direct script access allowed' );
+////////////////////////////////////////////////////////////////////////////////
+// File: application/views/long_form/ileads_request_xml.php
+//
+// Author: eamohl@leadsanddata.net
+//
+// Created: June 27, 2013
+//
+// Description:
+//
+////////////////////////////////////////////////////////////////////////////////
+
+echo '<?xml version="1.0" encoding="UTF-8"?' . ">\n"; ?>
 <request>
 	<source>
-		<password>d0c9b520269467d3905d29d9aa50f8db</password>
+		<password><?php echo $ileads_password; ?></password>
 		<campaign>1</campaign>
 		<type>payday</type>
 		<form>organic</form>
@@ -67,4 +78,8 @@
 		<data_pixel><?php echo $datax_pixel; ?></data_pixel>
 		<datax_pixel><?php echo $datax_pixel; ?></datax_pixel>
 	</lead_references>
-</request>
+</request>
+<?php
+////////////////////////////////////////////////////////////////////////////////
+// End of file: ileads_request.xml
+////////////////////////////////////////////////////////////////////////////////
