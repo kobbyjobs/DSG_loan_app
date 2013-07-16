@@ -17,18 +17,15 @@ class Control_panel extends CI_Controller
 		parent::__construct();
 		
 		$this->load->library('session');
-		//$this->load->helper('url');
 		$this->load->database();
 	}
 	
 	public function index ()
 	{
 		$this->load->helper( 'url' );
-		//$url = "https://secure.cashmoneynow.net/secure/DSG_loan_app/index.php/control_panel/";
 		
 		if ( $this->__check_user_logged_in() ) {
-			//redirect( $url . 'dashboard/' );
-			redirect( site_url( '/control_panel/dashboard/' ));
+			redirect( site_url( '/control_panel/dashboard' ));
 			die;
 		} else {
 			$this->load->view( 'control_panel/login' );
@@ -49,12 +46,10 @@ class Control_panel extends CI_Controller
 		
 		if ( $_password == $row->password ) {
 			$this->session->set_userdata( 'uid', $row->id );
-			//redirect( "https://secure.cashmoneynow.net/secure/DSG_loan_app/index.php/control_panel/dashboard/" );
-			redirect( site_url( '/control_panel/dashboard/' ));
+			redirect( site_url( '/control_panel/dashboard' ));
 			die;
 		} else {
-			//redirect( "https://secure.cashmoneynow.net/secure/DSG_loan_app/index.php/control_panel/" );
-			redirect( site_url( '/control_panel/' ));
+			redirect( site_url( '/control_panel' ));
 			die;
 		}
 	}
@@ -64,7 +59,7 @@ class Control_panel extends CI_Controller
 		$this->load->helper( 'url' );
 		
 		$this->session->sess_destroy();
-		//redirect( "https://secure.cashmoneynow.net/secure/DSG_loan_app/index.php/control_panel/" );
+		
 		redirect( site_url( '/control_panel' ));
 		die;
 	}
@@ -74,17 +69,11 @@ class Control_panel extends CI_Controller
 		$this->load->helper( 'url' );
 		
 		if ( ! $this->__check_user_logged_in() ) {
-			//redirect( "https://secure.cashmoneynow.net/secure/DSG_loan_app/index.php/control_panel/" );
-			redirect( site_url( '/control_panel/' ));
+			redirect( site_url( '/control_panel' ));
 			die;
 		} else {
 			$this->load->view( 'control_panel/dashboard' );
 		}
-	}
-	
-	public function section ( $id )
-	{
-	
 	}
 	
 	public function create_site_configuration ()

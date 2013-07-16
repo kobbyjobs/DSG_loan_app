@@ -14,6 +14,7 @@ class Site_configuration extends CI_Model
 {
 	public $id;
 	public $name;
+	
 	public $configuration_file;
 	public $created;
 	
@@ -21,6 +22,7 @@ class Site_configuration extends CI_Model
 	public $short_form;
 	public $long_form;
 	public $banner;
+	
 	public $round_robin;
 	
 	public $ping_tree_1;
@@ -98,17 +100,76 @@ class Site_configuration extends CI_Model
 	
 	public function from_post ()
 	{
+		// all except for id (more or less)
 		
+		$this->name = ( string ) $this->input->post( 'name' );
+		
+		$this->landing = ( string ) $this->input->post( 'landing' );
+		$this->short_form = ( int ) $this->input->post( 'short_form' );
+		$this->long_form = ( int ) $this->input->post( 'long_form' );
+		$this->banner = ( string ) $this->input->post( 'banner' );
+		
+		$this->ping_tree_1 = ( string ) $this->input->post( 'ping_tree_1' );
+		$this->ping_tree_2 = ( string ) $this->input->post( 'ping_tree_2' );
+		$this->ping_tree_3 = ( string ) $this->input->post( 'ping_tree_3' );
+		$this->ping_tree_4 = ( string ) $this->input->post( 'ping_tree_4' );
+		
+		$this->load->library( 'encrypt' );
+		
+		$this->configuration_file = ( string ) $this->encrypt->sha1( $this->name );
+		$this->configuration_file .= '.xml';
 	}
 	
 	public function create()
 	{
-	
+		$data = array(
+			'name' => $this->name,
+			'configuration_file' => $this->configuration_file,
+		);
+		
+		$this->db->insert( 'site_configurations', $data );
+		$this->id = $this->db->insert_id();
+		
+		$data['id'] = $this->id;
+		$data['landing'] = $this->landing;
+		$data['short_form'] = $this->short_form;
+		$data['long_form'] = $this->long_form;
+		$data['banner'] = $this->banner;
+		$data['ping_tree_1'] = $this->ping_tree_1;
+		$data['ping_tree_2'] = $this->ping_tree_2;
+		$data['ping_tree_3'] = $this->ping_tree_3;
+		$data['ping_tree_4'] = $this->ping_tree_4;
+		
+		$xml_str = $this->load->view( 'site_configuration_xml', $data, TRUE );
+		$this->load->helper( 'file' );
+		$path = '/home/cashmone/public_html/secure/DSG_loan_app/etc/sites/' . $this->configuration_file;
+		write_file( $path, $xml_str );
 	}
 	
 	public function update()
 	{
-	
+		$data = array(
+			'name' => $this->name,
+			'configuration_file' => $this->configuration_file,
+		);
+		
+		$this->db->where( 'id', $this->id );
+		$this->db->update( 'site_configurations', $data );
+		
+		$data['id'] = $this->id;
+		$data['landing'] = $this->landing;
+		$data['short_form'] = $this->short_form;
+		$data['long_form'] = $this->long_form;
+		$data['banner'] = $this->banner;
+		$data['ping_tree_1'] = $this->ping_tree_1;
+		$data['ping_tree_2'] = $this->ping_tree_2;
+		$data['ping_tree_3'] = $this->ping_tree_3;
+		$data['ping_tree_4'] = $this->ping_tree_4;
+		
+		$xml_str = $this->load->view( 'site_configuration_xml', $data, TRUE );
+		$this->load->helper( 'file' );
+		$path = '/home/cashmone/public_html/secure/DSG_loan_app/etc/sites/' . $this->configuration_file;
+		write_file( $path, $xml_str );
 	}
 }
 ////////////////////////////////////////////////////////////////////////////////

@@ -65,7 +65,6 @@
 							$( '#' + id ).remove();
 							
 							alert( 'New Site Configuration Created' );
-							//window.location.href = 'https://secure.cashmoneynow.net/secure/DSG_loan_app/index.php/control_panel/';
 						});
 					},
 					'Cancel' : function () {
@@ -81,7 +80,8 @@
 			var html = '<div id="' + id + '">\n' +
 				'\t<form name="edit_site_configuration_form" id="edit_site_configuration_form">\n' +
 					'\t\t<input id="id" name="id" type="hidden" value="-1" />\n' +
-					'\t\t<p>Site Name: <select id="name" name="name"><option value="-1">Select a site...</option></select><button id="load_site_configuration">Load</button></p>\n' +
+					'\t\t<p>Site to Edit: <select id="site_to_edit" name="site_to_edit"><option value="-1">Select a site...</option></select><button id="load_site_configuration">Load</button></p>\n' +
+					'\t\t<p>Site Name: <input id="name" name="name" type="text" value="" /></p>\n' +
 					'\t\t<p>Landing Page: <input id="landing" name="landing" type="text" value="" /></p>\n' +
 					'\t\t<p>Short-Form Offer ID: <input id="short_form" name="short_form" type="text" value="" /></p>\n' +
 					'\t\t<p>Long-Form Offer ID: <input id="long_form" name="long_form" type="text" value="" /></p>\n' +
@@ -115,13 +115,13 @@
 						var name = site_configurations[id];
 						var html = '<option value="' + id + '">' + name + '</option>\n';
 						
-						$( '#name' ).append( html );
+						$( '#site_to_edit' ).append( html );
 					}
 				});
 			})();
 			
 			$( '#load_site_configuration' ).click( function ( evt ) {
-				var id = $( '#name' ).val();
+				var id = $( '#site_to_edit' ).val();
 				id = parseInt( id );
 				
 				evt.preventDefault();
@@ -140,6 +140,7 @@
 							var site_configuration = data['site_configuration'];
 							
 							$( '#id' ).val( site_configuration['id'] );
+							$( '#name' ).val( site_configuration['name'] );
 							$( '#landing' ).val( site_configuration['landing'] );
 							$( '#short_form' ).val( site_configuration['short_form'] );
 							$( '#long_form' ).val( site_configuration['long_form'] );
@@ -167,8 +168,6 @@
 							var _data = $( '#edit_site_configuration_form' ).serialize();
 							var _url = 'https://secure.cashmoneynow.net/secure/DSG_loan_app/index.php/control_panel/update_site_configuration/';
 							
-							//console.log( 'edit_site_dialog.Save using id = ' + id );
-							
 							$.ajax({
 								type : 'POST',
 								url : _url,
@@ -178,11 +177,9 @@
 								$( '#' + id ).remove();
 								
 								alert( 'Site Configuration Updated' );
-								//window.location.href = 'https://secure.cashmoneynow.net/secure/DSG_loan_app/index.php/control_panel/';
 							});
 						},
 						'Cancel' : function () {
-							//console.log( 'edit_site_dialog.Cancel using id = ' + id );
 							$( '#' + id ).dialog( 'destroy' );
 							$( '#' + id ).remove();
 						}
