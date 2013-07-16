@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 ////////////////////////////////////////////////////////////////////////////////
-// File: WEBROOT/application/controller/control_panel.php
+// File: application/controller/control_panel.php
 //
 // Author: eamohl@leadsanddata.net
 //

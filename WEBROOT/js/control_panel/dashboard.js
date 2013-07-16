@@ -167,6 +167,8 @@
 						'Save' : function () {
 							var _data = $( '#edit_site_configuration_form' ).serialize();
 							var _url = 'https://secure.cashmoneynow.net/secure/DSG_loan_app/index.php/control_panel/update_site_configuration/';
+							var _id = parseInt( $( '#id' ).val() );
+							_url += _id;
 							
 							$.ajax({
 								type : 'POST',

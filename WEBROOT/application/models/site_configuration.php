@@ -1,6 +1,6 @@
 <?php if ( ! defined( 'BASEPATH' ) ) exit( 'No direct script access allowed' );
 ////////////////////////////////////////////////////////////////////////////////
-// File: WEBROOT/application/models/site_configuration.php
+// File: application/models/site_configuration.php
 //
 // Author: eamohl@leadsanddata.net
 //
@@ -33,7 +33,7 @@ class Site_configuration extends CI_Model
 	// mutual exclusion meta-data
 	public $mutex_meta;
 	
-	public function __construct()
+	public function __construct ()
 	{
 		parent::__construct();
 		
@@ -48,7 +48,7 @@ class Site_configuration extends CI_Model
 		);
 	}
 	
-	public function list_all()
+	public function list_all ()
 	{
 		$this->db->from( 'site_configurations' );
 		$this->db->select( '*' );
