@@ -1,0 +1,116 @@
+/*******************************************************************************
+ * File: css/control_panel/dashboard.css
+ *
+ * Author: eamohl@leadsanddata.net
+ *
+ * Created: July 15, 2013
+ *
+ * Description: 
+ *
+ ******************************************************************************/
+ 
+#nav_links {
+	float : right;
+}
+
+#nav_links ul {
+	float : right;
+}
+
+#nav_links li {
+	float : right;
+	padding-right : 20px;
+	padding-top : 20px;
+	padding-bottom : 20px;
+	padding-left : 20px;
+}
+
+#nav_links a {
+	text-decoration : none;
+}
+
+#op_links {
+	width : 400px;
+	
+	padding-bottom : 30px;
+
+	float : none;
+	clear : both;
+	
+	margin-top : 200px;
+	margin-right : auto;
+	margin-left : auto;
+	
+	background-color : #EEEEEE;
+}
+
+#op_links > ul {
+	width : 100%;
+}
+
+#op_links li {
+	width : 100%;
+	
+	padding-top : 20px;
+	
+	text-align : center;
+}
+
+#op_links li > a {
+	width : 80%;
+}
+
+#name {
+	width : 400px;
+}
+
+#landing {
+	width : 400px;
+}
+
+#short_form {
+	width : 50px;
+}
+
+#long_form {
+	width : 50px;
+}
+
+#banner {
+	width : 400px;
+}
+
+#ping_tree_1 {
+	width : 400px;
+}
+
+#ping_tree_2 {
+	width : 400px;
+}
+
+#ping_tree_3 {
+	width : 400px;
+}
+
+#ping_tree_4 {
+	width : 400px;
+}
+
+/*******************************************************************************
+ * This right here allows us to hide the top-right 'X' button for any give
+ * dialog with the option 'dialogClass' set to 'no-close'
+ ******************************************************************************/
+.no-close .ui-dialog-titlebar-close {
+	display : none;
+}
+
+h3 {
+	text-align : center;
+	padding-top : 20px;
+	padding-bottom : 20px;
+	font-size : 20px;
+}
+ 
+ /******************************************************************************
+  * End of file: dashboard.css
+  *****************************************************************************/
