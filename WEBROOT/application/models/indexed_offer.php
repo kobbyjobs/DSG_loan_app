@@ -35,7 +35,24 @@ class Indexed_offer extends CI_Model
 		$indexed_offers = array();
 		
 		foreach ( $query->result() as $row ) {
-			$indexed_offers[( int ) $row->offer_id] = $row->site_configuration_id;
+			$indexed_offers[( int ) $row->offer_id] = $row->id;
+		}
+		
+		return $indexed_offers;
+	}
+	
+	public function list_by_offer_id ( $offer_id )
+	{
+		$this->db->from( 'indexed_offers' );
+		$this->db->where( 'offer_id', $offer_id );
+		$this->db->select( '*' );
+		
+		$query = $this->db->get();
+		
+		$indexed_offers = array();
+		
+		foreach ( $query->result() as $row ) {
+			$indexed_offers[( int ) $row->offer_id] = $row->id;
 		}
 		
 		return $indexed_offers;

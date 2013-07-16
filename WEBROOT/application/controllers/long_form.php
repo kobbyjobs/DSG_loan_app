@@ -135,7 +135,7 @@ class Long_form extends CI_Controller
 		$zip_code = $this->input->post('zip_code');
 		$months_at_address = $this->input->post('months_at_address');
 		$months_at_address_years_part = $this->input->post('months_at_address_years_part');
-		$months_at_address_months_part = $this->input->post('monts_at_address_months_part');
+		$months_at_address_months_part = $this->input->post('months_at_address_months_part');
 		$employer_name = $this->input->post('employer_name');
 		$employer_phone = $this->input->post('employer_phone');
 		$job_title = $this->input->post('job_title');
@@ -236,24 +236,71 @@ class Long_form extends CI_Controller
 		$long_form_id = $this->db->insert_id();
 		
 		
-		$ileads_passwords = array(
-			1 => 'dd0d7afa2414fc1d3ddc18c87351478f',
+		//$ileads_passwords = array(
+		//	1 => 'dd0d7afa2414fc1d3ddc18c87351478f',
 			// Channel A - Tree 1
-			2 => '39ee7fc35a742eca693ccc1e90406c45',
+		//	2 => '39ee7fc35a742eca693ccc1e90406c45',
 			// Channel A - Tree 2
-			3 => 'a211f5cdb4c7165d2ffe1a47bb5e6288',
+		//	3 => 'a211f5cdb4c7165d2ffe1a47bb5e6288',
 			// Channel A - Tree 3
-			0 => 'c21fc7ff765648e28f514cb0af8e219e'//,
+		//	0 => 'c21fc7ff765648e28f514cb0af8e219e'//,
 			// Channel A - Tree 4
 			//0 => '69c0ad841804b55c5447fd118b54d7de'
 			// Channel A - Tree 5
-		);
+		//);
 		
 		
 		//$ileads_passwords = $this->_load_ileads_passwords_xml();
 		
-		$index = $long_form_id % count($ileads_passwords);
+		//$index = $long_form_id % count($ileads_passwords);
+		//$ileads_password = $ileads_passwords[$index];
+		
+		$ileads_password = NULL;
+		
+		$this->load->model( 'indexed_offer' );
+		$indexed_offers = $this->indexed_offer->list_by_offer_id( $offer_id );
+		$this->indexed_offer->id = $indexed_offers[$offer_id];
+		$this->indexed_offer->load();
+		
+		$this->load->model( 'site_configuration' );
+		$this->site_configuration->id = $this->indexed_offer->site_configuration_id;
+		$this->site_configuration->load();
+		
+		$ileads_passwords = array(
+			0 => $this->site_configuration->ping_tree_1,
+			1 => $this->site_configuration->ping_tree_2,
+			2 => $this->site_configuration->ping_tree_3,
+			3 => $this->site_configuration->ping_tree_4,
+		);
+		
+		$this->db->from( 'long_forms' );
+		$this->db->select( '*' );
+		$this->db->where( 'id', $long_form_id );
+		$query = $this->db->get();
+		$row = $query->row();
+		
+		$prior_count = 0;
+		$start_of_today = '' . date( 'Y-m-d' ) . ' 00:00:00';
+		
+		$this->db->from( 'long_forms' );
+		$this->db->select( '*' );
+		$this->db->where( 'created_timestamp >=', $start_of_today );
+		$this->db->where( 'created_timestamp <', $row->created_timestamp );
+		$this->db->where( 'offer_id', $this->site_configuration->short_form );
+		
+		$prior_count = $this->db->count_all_results();
+		
+		$this->db->from( 'long_forms' );
+		$this->db->select( '*' );
+		$this->db->where( 'created_timestamp >=', $start_of_today );
+		$this->db->where( 'created_timestamp <', $row->created_timestamp );
+		$this->db->where( 'offer_id', $this->site_configuration->long_form );
+		
+		$prior_count += $this->db->count_all_results();
+		
+		$index = $prior_count % 4;
 		$ileads_password = $ileads_passwords[$index];
+		
 		$data['ileads_password'] = $ileads_password;
 		
 		$data['social_security_number'] = $social_security_number;

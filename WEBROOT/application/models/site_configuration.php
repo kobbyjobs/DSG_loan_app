@@ -144,10 +144,40 @@ class Site_configuration extends CI_Model
 		$this->load->helper( 'file' );
 		$path = '/home/cashmone/public_html/secure/DSG_loan_app/etc/sites/' . $this->configuration_file;
 		write_file( $path, $xml_str );
+		
+		// create entries in indexed_offers
+		$this->load->model( 'indexed_offer' );
+		$this->indexed_offer->offer_id = $this->short_form;
+		$this->indexed_offer->site_configuration_id = $this->id;
+		$this->indexed_offer->create();
+		
+		$this->indexed_offer->id = NULL;
+		$this->indexed_offer->offer_id = $this->long_form;
+		$this->indexed_offer->site_configuration_id = $this->id;
+		$this->indexed_offer->create();
 	}
 	
 	public function update()
 	{
+		// delete existing entries in indexed_offers
+		$this->load->model( 'indexed_offer' );
+		$indexed_offers = $this->indexed_offer->list_by_site_configuration_id( $this->id );
+		foreach ( $indexed_offers as $offer_id => $indexed_offer_id ) {
+			$this->indexed_offer->id = $indexed_offer_id;
+			$this->indexed_offer->delete();
+		}
+		
+		// add new entries in indexed_offers
+		$this->indexed_offer->id = NULL;
+		$this->indexed_offer->offer_id = $this->short_form;
+		$this->indexed_offer->site_configuration_id = $this->id;
+		$this->indexed_offer->create();
+		
+		$this->indexed_offer->id = NULL;
+		$this->indexed_offer->offer_id = $this->long_form;
+		$this->indexed_offer->site_configuration_id = $this->id;
+		$this->indexed_offer->create();
+		
 		$data = array(
 			'name' => $this->name,
 			'configuration_file' => $this->configuration_file,
