@@ -18,9 +18,19 @@ class Short_form extends CI_Controller
 		$last_name = $this->input->get('last_name');
 		$street_address = $this->input->get('street_address');
 		$zip_code = $this->input->get('zip_code');
-		$home_phone = $this->input->get('home_phone');
-		$mobile_phone = $this->input->get('mobile_phone');
-		$email = $this->input->get('email');
+		//$home_phone = $this->input->get('home_phone');
+		//$mobile_phone = $this->input->get('mobile_phone');
+		$email = $this->input->get('email');
+		$home_phone = '';
+		$mobile_phone = '';
+		
+		$primary_phone = $this->input->get( 'primary_phone' );
+		$device = $this->input->get( 'device' );
+		if ( 'Mobile' == $device ) {
+			$mobile_phone = $primary_phone;
+		} else {
+			$home_phone = $primary_phone;
+		}
 		
 		$client_ip_address = $this->input->ip_address();
 		
@@ -44,17 +54,15 @@ class Short_form extends CI_Controller
 		// fire postback url with transaction id
 		$postback_url = "http://link.go2oursite.net/SP6D?adv_sub=$email&transaction_id=$transaction_id";
 		//$response = http_get($postback_url);
-		$response = file_get_contents($postback_url);
-		if ( ! $response ) {
-			// There was a problem doing the postback
-			
-			// log it somewhere...
-		}
+		//$response = file_get_contents($postback_url);
 		
 		$this->load->helper('url');
 		
-		$target_offer_id = $this->input->get('target_offer_id');
-		$redirect_url = "http://link.go2oursite.net/aff_c?offer_id=$target_offer_id&aff_id=$aff_id&url_id=21&short_form_id=$short_form_id";
+		//$target_offer_id = $this->input->get('target_offer_id');
+		//$redirect_url = "http://link.go2oursite.net/aff_c?offer_id=$target_offer_id&aff_id=$aff_id&url_id=21&short_form_id=$short_form_id";
+		
+		$redirect_url = "https://secure.cashmoneynow.net/secure/DSG_loan_app/index.php/long_form/show_from_short_form/$short_form_id/$aff_id/$offer_id/$transaction_id/";
+		
 		redirect($redirect_url, 'location', 302);
 	}
 	

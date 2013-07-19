@@ -34,7 +34,8 @@ class Long_form extends CI_Controller
 			'home_phone' => '(239) 555-1234',
 			'mobile_phone' => '(239) 555-5678',
 			'email' => 'MITHEONEX.PIXEL@EXAMPLE.NET',
-			'short_form_id' => 0
+			'short_form_id' => 0,
+			'site_banner' => 'media/banners/justclickhereloans.png',
 		);
 		
 		$security_token = $this->_generate_security_token(0);
@@ -61,6 +62,19 @@ class Long_form extends CI_Controller
 		
 		$security_token = $this->_generate_security_token(0);
 		$data['security_token'] = $security_token;
+		
+		$site_banner = NULL;
+		
+		$this->load->model( 'indexed_offer' );
+		$indexed_offers = $this->indexed_offer->list_by_offer_id( $offer_id );
+		$this->indexed_offer->id = $indexed_offers[$offer_id];
+		$this->indexed_offer->load();
+		$this->load->model( 'site_configuration' );
+		$this->site_configuration->id = $this->indexed_offer->site_configuration_id;
+		$this->site_configuration->load();
+		$site_banner = $this->site_configuration->banner;
+		
+		$data['site_banner'] = $site_banner;
 		
 		$this->load->view('long_form/main', $data);
 	}
@@ -97,6 +111,19 @@ class Long_form extends CI_Controller
 		
 		$security_token = $this->_generate_security_token($short_form_id);
 		$data['security_token'] = $security_token;
+		
+		$site_banner = NULL;
+		
+		$this->load->model( 'indexed_offer' );
+		$indexed_offers = $this->indexed_offer->list_by_offer_id( $offer_id );
+		$this->indexed_offer->id = $indexed_offers[$offer_id];
+		$this->indexed_offer->load();
+		$this->load->model( 'site_configuration' );
+		$this->site_configuration->id = $this->indexed_offer->site_configuration_id;
+		$this->site_configuration->load();
+		$site_banner = $this->site_configuration->banner;
+		
+		$data['site_banner'] = $site_banner;
 		
 		$this->load->view('long_form/main', $data);
 	}
@@ -235,26 +262,6 @@ class Long_form extends CI_Controller
 		$this->db->insert('long_forms', $data);
 		$long_form_id = $this->db->insert_id();
 		
-		
-		//$ileads_passwords = array(
-		//	1 => 'dd0d7afa2414fc1d3ddc18c87351478f',
-			// Channel A - Tree 1
-		//	2 => '39ee7fc35a742eca693ccc1e90406c45',
-			// Channel A - Tree 2
-		//	3 => 'a211f5cdb4c7165d2ffe1a47bb5e6288',
-			// Channel A - Tree 3
-		//	0 => 'c21fc7ff765648e28f514cb0af8e219e'//,
-			// Channel A - Tree 4
-			//0 => '69c0ad841804b55c5447fd118b54d7de'
-			// Channel A - Tree 5
-		//);
-		
-		
-		//$ileads_passwords = $this->_load_ileads_passwords_xml();
-		
-		//$index = $long_form_id % count($ileads_passwords);
-		//$ileads_password = $ileads_passwords[$index];
-		
 		$ileads_password = NULL;
 		
 		$this->load->model( 'indexed_offer' );
@@ -349,7 +356,7 @@ class Long_form extends CI_Controller
 			$application_status = 'ACCEPTED';
 			
 			$postback_url = "http://link.go2oursite.net/SP6F?adv_sub=$email&amount=$price&transaction_id=$transaction_id";
-			file_get_contents($postback_url);
+			//file_get_contents($postback_url);
 		} else {
 			$redirect_url = "http://delta.rspcdn.com/xprr/red/PID/1453/SID/$aff_id?fname=$first_name&lname=$last_name&email=" . urlencode($email);
 			$price = 0.00;
@@ -368,11 +375,17 @@ class Long_form extends CI_Controller
 		
 		$data = array(
 			'accepted' => $success,
-			'redirect_url' => $redirect_url
+			'redirect_url' => $redirect_url,
+			'price' => $price,
+			'email' => $email,
+			'transaction_id' => $transaction_id,
 		);
 		
+		$json = json_encode( array( 'submission_response' => $data ));
+		
 		$this->output->set_content_type('application/json');
-		$this->load->view('long_form/post_and_continue_json', $data);
+		$this->output->set_output( $json );
+		//$this->load->view('long_form/post_and_continue_json', $data);
 	}
 	
 	public function update_and_continue ($long_form_id, $security_token)

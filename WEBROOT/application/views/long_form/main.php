@@ -23,7 +23,7 @@ $data = array(
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	
 	<link rel="stylesheet" type="text/css" media="screen" href="<?php echo base_url('css/reset.css'); ?>" />
-	<link rel="stylesheet" type="text/css" media="screen" href="<?php echo base_url('css/smoothness/jquery-ui-1.10.3.custom.min.css'); ?>" />
+	<link rel="stylesheet" type="text/css" media="screen" href="<?php echo base_url('css/custom-theme/jquery-ui-1.10.3.custom.min.css'); ?>" />
 	<link rel="stylesheet" type="text/css" media="screen" href="<?php echo base_url('css/long_form.css'); ?>" />
 	<link rel="stylesheet" type="text/css" media="screen" href="<?php echo base_url('css/form_panels.css'); ?>" />
 	
@@ -58,7 +58,7 @@ $data = array(
 				<p><?php echo date('l F j, Y g:i:sa'); ?></p>
 			</div>
 			
-			<div id="header_banner" style="background-image:url(<?php echo base_url('media/justclickhereloans_header_large.jpg'); ?>);">&nbsp;</div>
+			<div id="header_banner" style="background-image:url(<?php echo base_url( $site_banner ); ?>);">&nbsp;</div>
 		</div>
 		
 		<div id="content">
@@ -85,6 +85,14 @@ $data = array(
 				<?php $this->load->view('long_form/footer_navigation_links'); ?>
 			</div>
 		</div>
+	</div>
+	<div id="#conversion_pixels">
+<!-- Offer Conversion: Justclickhereloans.com - SHORT Form -->
+<iframe src="https://link.go2oursite.net/SL2?adv_sub=<?php echo $email; ?>&transaction_id=<?php echo $transaction_id; ?>" scrolling="no" frameborder="0" width="1" height="1"></iframe>
+<!-- // End Offer Conversion -->
+<!-- Offer Conversion: Topdollarcashloans.com - SHORT Form -->
+<iframe src="https://link.go2oursite.net/SL6L?adv_sub=<?php echo $email; ?>&transaction_id=<?php echo $transaction_id; ?>" scrolling="no" frameborder="0" width="1" height="1"></iframe>
+<!-- // End Offer Conversion -->
 	</div>
 </body>
 </html>

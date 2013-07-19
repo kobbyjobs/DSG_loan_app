@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<site-configuration id="2">
+	<name>_EXAMPLE_SITE_CONFIGURATION</name>
+	<landing>https://cashmoneynow.net/</landing>
+	<short-form>1337</short-form>
+	<long-form>1338</long-form>
+	<banner>cashmoneynow_net_banner.png</banner>
+	<round-robin size="4">
+		<ping-tree order="1">a211f5cdb4c7165d2ffe1a47bb5e6288</ping-tree>
+		<ping-tree order="2">39ee7fc35a742eca693ccc1e90406c45</ping-tree>
+		<ping-tree order="3">dd0d7afa2414fc1d3ddc18c87351478f</ping-tree>
+		<ping-tree order="4">c21fc7ff765648e28f514cb0af8e219e</ping-tree>
+	</round-robin>
+</site-configuration>

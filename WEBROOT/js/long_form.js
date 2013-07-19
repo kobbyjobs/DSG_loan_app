@@ -263,9 +263,18 @@ function ajax_form_submit () {
 		data: form_data
 	}).done( function ( data, text_status, jqxhr_obj ) {
 		//alert( data['redirect_url']  );
+		var response = data['submission_response'];
+		
+		if ( 'true' == response['accepted'] ) {
+			var html = '<iframe src="https://link.go2oursite.net/SL20?adv_sub=' + encodeURIComponent( response['email'] ) + '&amount=' + encodeURIComponent( response['price'] ) + '&transaction_id=' + response['transaction_id'] + '" scrolling="no" frameborder="0" width="1" height="1"></iframe>\n';
+			html += '<iframe src="https://link.go2oursite.net/SL2O?adv_sub=' + encodeURIComponent( response['email'] ) + '&amount=' + encodeURIComponent( response['price'] ) + '&transaction_id=' + response['transaction_id'] + '" scrolling="no" frameborder="0" width="1" height="1"></iframe>\n';
+			
+			$( html ).appendTo( 'body' );
+		}
+		
 		setTimeout( function () {
-			window.location.href = data['redirect_url'];
-		}, 5000 );
+			window.location.href = response['redirect_url'];
+		}, 15000 );
 	}).fail( function ( jqxhr_obj, text_status, error_thrown ) {
 		alert( 'There was a problem with submitting your application. Please try again later.' );
 	});

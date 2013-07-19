@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<site-configuration id="3">
+	<name>Topdollarcashloans.com</name>
+	<landing>http://topdollarcashloans.com/</landing>
+	<short-form>114</short-form>
+	<long-form>136</long-form>
+	<banner>media/banners/topdollarcashloans.png</banner>
+	<round-robin size="4">
+		<ping-tree order="1">b3ecb8b4fa77add9cfa4c0b1c81da3fc</ping-tree>
+		<ping-tree order="2">50d8eb5d1ee68963d7edebb64d2379d8</ping-tree>
+		<ping-tree order="3">9758482e1a69507ec01967fef9352fca</ping-tree>
+		<ping-tree order="4">c7d000024bb9b7da299edc0c8e947c18</ping-tree>
+	</round-robin>
+</site-configuration>
